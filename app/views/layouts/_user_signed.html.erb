@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+	<ul class="navbar-nav ml-auto">
+	  <li class="nav-link"><%= image_tag gravatar_url(current_user.email, 30), alt: "", class: "rounded-circle" %></li>
+		<li class="nav-link"><%= link_to "Salir", destroy_user_session_path, method: :delete, class: "text-white" %></li>
+  </ul>
+<% else %>
+	<ul class="navbar-nav ml-auto">
+  	<li class="nav-link"><%= link_to "Ingresar", new_user_session_path, class: "text-white" %></li>
+  	<li class="nav-link"><%= link_to "Registrarse", new_user_registration_path, class: "text-white" %></li>
+  </ul>
+<% end %>

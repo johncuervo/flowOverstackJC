@@ -1,0 +1,41 @@
+<div class="container my-5">
+  <div class="row justify-content-between">
+    <h3 class= "font-weight-bold">Preguntas</h3>
+    <span class="d-flex justify-content-end">
+      <%= link_to 'Nueva Pregunta', new_question_path, class:"btn btn-primary" %>
+    </span>
+  </div>
+
+  <div class="row my-5">
+      <table class="table">
+        <tbody>
+          <% @questions.each do |question| %>
+            <tr>
+            <td class="metric col-1 text-center align-middle">
+              <span class="metric-value">votos</span>
+            </td>
+
+            <td class="metric col-1 text-center align-middle">
+              <span class="metric-value">respuestas</span>
+            </td>
+
+            <td class="metric col-9 text-justify">
+              <span class="metric-value"><%= link_to question.title, question, class: 'text-danger' %></span>
+              <h6 class="mt-2 mb-0 text-right">Preguntó <%= link_to question.user.email, question %> hace <%= time_ago_in_words(question.created_at)%></h6>
+
+            </td>
+
+            <td class="metric col-1 text-right align-bottom">
+              <% if user_signed_in? && current_user.id == question.user_id  %>
+                <span class="metric-value">
+                  <%# <%= link_to "", edit_question_path(question), class: "fas fa-edit mr-1" %>
+                  <%= link_to "", question_path(question), class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar la pregunta?' }  %>
+                </span>
+              <% end %>
+            </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
