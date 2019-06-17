@@ -1,0 +1,23 @@
+
+<div id="answer-<%= answer.id %>">
+  <div class="q-body d-flex py-3">
+
+    <div class="d-inline mx-3 w-100">
+
+      <p class="a-content">
+        <%= image_tag gravatar_url(answer.user.email, 30), alt: "", class: "rounded-circle mr-3" %>
+        <%= answer.content %>
+      </p>
+      <div class="q-icons float-right">
+        <% if user_signed_in? && current_user.id == answer.user_id  %>
+          <span class="metric-value">
+            <%#= link_to  'edit', edit_question_path(@question), class:"material-icons i" %>
+            <%= link_to  '', [@question, answer], remote: true, class: "fas fa-trash-alt", method: 'delete', data:{confirm: "Desea eliminar la respuesta?"} %>
+          </span>
+        <% end %>
+      </div>
+      <br>
+      <hr>
+    </div>
+  </div>
+</div>

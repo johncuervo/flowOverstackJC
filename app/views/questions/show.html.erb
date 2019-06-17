@@ -2,7 +2,7 @@
   <div class="row">
     <h2 class= "col-12 font-weight-bold text-danger mb-4"><%= @question.title %></h2>
 
-      <div class="col-1 text-center">
+      <div class="col-1 d-flex justify-content-center align-items-center">
         votos
       </div>
       <div class="col-11 text-justify">
@@ -11,5 +11,11 @@
 
   </div>
     <hr>
-    <!-- <hr style="color: black; background-color: black; height: 0.1em;" /> -->
+    <hr style="color: black; background-color: black; height: 0.1em;" />
+
+    <h2 class= "col-12 font-weight-bold text-danger mr-4 ">Respuestas</h2>
+    <div class="ans-list">
+      <%= render @question.answers.order(created_at: :asc) %>
+    </div>
+    <%= render 'answers/form' %>
 </div>
