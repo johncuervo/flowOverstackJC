@@ -1,0 +1,16 @@
+<div id="com-<%= comment.id %>">
+  <div class="q-body d-flex py-3">
+    <div class="d-inline mx-3 w-100">
+      <p class="c-content">
+        <%= image_tag gravatar_url(comment.user.email, 30), alt: "", class: "rounded-circle mr-3" %>
+        <%= comment.content %>
+      </p>
+      <div class="c-icons float-right">
+        <% if user_signed_in? && current_user.id == comment.user_id  %>
+          <span class="metric-value">
+          </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

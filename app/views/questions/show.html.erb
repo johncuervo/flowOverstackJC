@@ -2,15 +2,25 @@
   <div class="row">
     <h2 class= "col-12 font-weight-bold text-danger mb-4"><%= @question.title %></h2>
 
-      <div class="col-1 d-flex justify-content-center align-items-center">
-        votos
+    <div class="col-1 d-flex justify-content-center">
+      votos
+    </div>
+    <div class="col-11 text-justify">
+      <%= @question.content %>
+      <hr>
+      <div class="q-com">
+
+        <div id="quecom-list">
+          <%= render  @question.comments %>
+        </div>
+        <div class="quecom-form">
+          <%= render  "comments/form", commentable: @question %>
+        </div>
       </div>
-      <div class="col-11 text-justify">
-        <%= @question.content %>
-      </div>
+    </div>
 
   </div>
-    <hr>
+    <br>
     <hr style="color: black; background-color: black; height: 0.1em;" />
 
     <h2 class= "col-12 font-weight-bold text-danger mr-4 ">Respuestas</h2>
