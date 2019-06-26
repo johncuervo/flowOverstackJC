@@ -1,11 +1,9 @@
 <div id="answer-<%= answer.id %>">
-  <div class="q-body d-flex py-3">
-
+  <div class="d-flex py-3">
     <div class="d-inline mx-3 w-100">
-
-      <p class="a-content">
+      <p>
         <%= image_tag gravatar_url(answer.user.email, 30), alt: "", class: "rounded-circle mr-3" %>
-        <%= answer.content %>
+        <%= markdown(answer.content) %>
       </p>
       <div class="q-icons float-right">
         <% if user_signed_in? && current_user.id == answer.user_id  %>
@@ -18,9 +16,11 @@
       <div id="anscom-list">
         <%= render  answer.comments %>
       </div>
-      <div id="anscom-box">
-        <%= render  "comments/form", commentable: answer %>
-      </div>
+      <% if user_signed_in? %>
+        <div id="anscom-box">
+          <%= render  "comments/form", commentable: answer %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

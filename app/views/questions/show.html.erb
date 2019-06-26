@@ -1,31 +1,60 @@
-<div class="container my-5">
+  <div class="container my-5">
   <div class="row">
     <h2 class= "col-12 font-weight-bold text-danger mb-4"><%= @question.title %></h2>
-
     <div class="col-1 d-flex justify-content-center">
-      votos
+      <span><%= @question.votes.count %></span>
+      <% if user_signed_in? %>
+        <% if @question.voted_by? current_user %>
+          <%= link_to question_votes_path(@question), method: :delete, class:"counters mx-2 d-flex align-items-center flex-column my-2" do %>
+            <i class="fas fa-arrow-circle-down"> </i>
+          <% end %>
+          <% else %>
+          <%= link_to question_votes_path(@question), method: :post, class:"counters mx-2 d-flex align-items-center flex-column" do %>
+            <i class="fas fa-arrow-circle-up"> </i>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-11 text-justify">
       <%= @question.content %>
       <hr>
       <div class="q-com">
-
         <div id="quecom-list">
           <%= render  @question.comments %>
         </div>
-        <div class="quecom-form">
-          <%= render  "comments/form", commentable: @question %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="quecom-form">
+            <%= render  "comments/form", commentable: @question %>
+          </div>
+        <% end %>
       </div>
     </div>
-
   </div>
-    <br>
-    <hr style="color: black; background-color: black; height: 0.1em;" />
-
+  <br>
+  <hr style="color: black; background-color: black; height: 0.1em;" />
+  <div class="row">
     <h2 class= "col-12 font-weight-bold text-danger mr-4 ">Respuestas</h2>
-    <div class="ans-list">
-      <%= render @question.answers.order(created_at: :asc) %>
+    <div class="col-1 d-flex justify-content-center">
+      <span><%= @question.votes.count %></span>
+      <% if @question.voted_by? current_user && user_signed_in? %>
+        <%= link_to question_votes_path(@question), method: :delete, class:"counters mx-2 d-flex align-items-center flex-column my-2" do %>
+          <i class="fas fa-arrow-circle-down"> </i>
+        <% end %>
+        <% else %>
+        <%= link_to question_votes_path(@question), method: :post, class:"counters mx-2 d-flex align-items-center flex-column" do %>
+          <i class="fas fa-arrow-circle-up"> </i>
+        <% end %>
+      <% end %>
     </div>
-    <%= render 'answers/form' %>
+    <div class="col-11 text-justify">
+      <div class="ans-list">
+        <%= render @question.answers.order(created_at: :asc) %>
+      </div>
+      <% if user_signed_in? %>
+        <div class="ans-form">
+          <%= render 'answers/form' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

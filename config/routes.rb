@@ -4,11 +4,13 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :questions do
+    resource :votes
     resources :answers
     resources :comments
   end
 
   resources :answers do
+    resource :votes
     resources :comments
   end
 

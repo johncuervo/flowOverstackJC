@@ -1,39 +1,42 @@
 <div class="container my-5">
   <div class="row justify-content-between">
     <h3 class= "font-weight-bold">Preguntas</h3>
+    <% if user_signed_in? %>
     <span class="d-flex justify-content-end">
       <%= link_to 'Nueva Pregunta', new_question_path, class:"btn btn-primary" %>
     </span>
+    <% end %>
   </div>
-
   <div class="row my-5">
       <table class="table">
         <tbody>
           <% @questions.each do |question| %>
             <tr>
-            <td class="metric col-1 text-center align-middle">
-              <span class="metric-value">votos</span>
-            </td>
+              <td class="metric col-1 text-center align-middle">
+                <div class="counters"><%= question.votes.count %></div>
+                <span class="metric-value">votos</span>
+              </td>
 
-            <td class="metric col-1 text-center align-middle">
-              <span class="metric-value">respuestas</span>
-            </td>
+              <td class="metric col-1 text-center align-middle">
+                <div class="counters"><%= question.answers.count %></div>
+                <span class="metric-value">respuestas</span>
+              </td>
 
-            <td class="metric col-9 text-justify">
-              <span class="metric-value"><%= link_to question.title, question, class: 'text-danger pl-3' %></span>
-              <h6 class="mt-3 mb-0 text-right">Preguntó <%= link_to question.user.email, question %>, <%= question.created_at.strftime("%A %d de %B")%></h6>
+              <td class="metric col-9 text-justify">
+                <span class="metric-value"><%= link_to question.title, question, class: 'text-danger pl-3' %></span>
+                <h6 class="mt-3 mb-0 text-right">Preguntó <%= link_to question.user.email %>, <%= question.created_at.strftime("%A %d de %B")%></h6>
 
-            </td>
+              </td>
 
-            <td class="metric col-1 text-right align-bottom">
-              <% if user_signed_in? && current_user.id == question.user_id  %>
-                <span class="metric-value">
-                  <%# <%= link_to "", edit_question_path(question), class: "fas fa-edit mr-1" %>
-                  <%# <%= link_to "", question_path(question), class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar la pregunta?' }  %>
-                  <%= link_to "", question, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar la pregunta?' }  %>
-                </span>
-              <% end %>
-            </td>
+              <td class="metric col-1 text-right align-bottom">
+                <% if user_signed_in? && current_user.id == question.user_id  %>
+                  <span class="metric-value">
+                    <%# <%= link_to "", edit_question_path(question), class: "fas fa-edit mr-1" %>
+                    <%# <%= link_to "", question_path(question), class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar la pregunta?' }  %>
+                    <%= link_to "", question, class: "fas fa-trash-alt", method: :delete, data: { confirm: 'Desea eliminar la pregunta?' }  %>
+                  </span>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

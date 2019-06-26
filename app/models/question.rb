@@ -17,6 +17,7 @@ class Question < ApplicationRecord
   has_many :votes, as: :votable
 
   def self.search(search)
-    search ? where(['title LIKE ?', "%#{search}%"]) : all    
+    search ? where(['title LIKE ?', "%#{search}%"]) : all
   end
+
 end
