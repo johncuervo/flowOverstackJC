@@ -1,9 +1,10 @@
+
 <%= form_for [@question, @question.answers.build], remote: true do |f| %>
 <div class="form-group">
   <%= f.text_area :content, rows: 3, placeholder:"Escribe tu respuesta...", class:"form-control", id:"ans-box" %>
 </div>
 <%= f.submit 'Responder!', class:"btn btn-outline-dark float-right"%>
 <% end %>
-
-
-    
+<br>
+<br>
+<hr>

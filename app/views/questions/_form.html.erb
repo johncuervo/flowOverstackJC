@@ -16,11 +16,11 @@
 
         <%= form_for @question do |f| %>
           <div class="form-group">
-            <%= f.text_field :title, class: "form-control input-lg", placeholder: "Titulo" %>
+            <%= f.text_field :title, class: "form-control input-lg", placeholder: "Pregunta." %>
           </div>
 
           <div class="form-group">
-            <%= f.text_area :content, style:"height:12em;", class: "form-control input-lg", placeholder: "Pregunta" %>
+            <%= f.text_area :content, style:"height:12em;", class: "form-control input-lg", placeholder: "Descripción." %>
           </div>
           <div>
             <%= f.submit 'Preguntar' %>

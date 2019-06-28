@@ -1,19 +1,22 @@
-<div id="answer-<%= answer.id %>">
-  <div class="d-flex py-3">
-    <div class="d-inline mx-3 w-100">
-      <p>
+<div id="answer-<%= answer.id %>" >
+  <div class="row">
+    <div class="col-1 d-flex justify-content-center">
+      <%= render partial: "votes/vote", locals:{var: answer, path: answer_votes_path(answer)}  %>
+    </div>
+    <div class="col-11 text-justify answer">
+      <p class="a-content">
         <%= image_tag gravatar_url(answer.user.email, 30), alt: "", class: "rounded-circle mr-3" %>
-        <%= markdown(answer.content) %>
+        <%= answer.content %>
       </p>
       <div class="q-icons float-right">
         <% if user_signed_in? && current_user.id == answer.user_id  %>
           <span class="metric-value">
             <%#= link_to  'edit', edit_question_path(@question), class:"material-icons i" %>
-            <%= link_to  '', [@question, answer], remote: true, class: "fas fa-trash-alt mb-", method: 'delete', data:{confirm: "Desea eliminar la respuesta?"} %>
+            <%= link_to  '', [@question, answer], remote: true, class: "fas fa-trash-alt ", method: 'delete', data:{confirm: "Desea eliminar la respuesta?"} %>
           </span>
         <% end %>
       </div>
-      <div id="anscom-list">
+      <div id="anscom-list" style="margin-top: 50px;">
         <%= render  answer.comments %>
       </div>
       <% if user_signed_in? %>
@@ -21,7 +24,7 @@
           <%= render  "comments/form", commentable: answer %>
         </div>
       <% end %>
+      <hr>
     </div>
   </div>
 </div>
-<hr>
