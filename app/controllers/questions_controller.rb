@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
     def index
       @questions = Question.all.order(created_at: :desc)
@@ -14,7 +15,7 @@ class QuestionsController < ApplicationController
       @question = Question.new(question_params)
       @question.user = current_user
       if @question.save
-        redirect_to questions_path, notice: 'Pregunta creada correctamente.'
+        redirect_to question_path(@question), notice: 'Pregunta creada correctamente.'
       else
         render :new
       end

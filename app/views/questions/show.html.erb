@@ -5,7 +5,7 @@
       <%= render partial: "votes/vote", locals:{var: @question, path: question_votes_path(@question)}  %>
     </div>
     <div class="col-11 text-justify question">
-      <%= @question.content %>
+      <%= markdown(@question.content) %>
       <div class="q-com mt-5">
         <div id="quecom-list">
           <%= render  @question.comments %>

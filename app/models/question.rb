@@ -16,6 +16,8 @@ class Question < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
 
+  validates :title, :content, presence: true
+
   def self.search(search)
     search ? where(['title LIKE ?', "%#{search}%"]) : all
   end
