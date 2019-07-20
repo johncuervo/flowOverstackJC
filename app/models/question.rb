@@ -19,7 +19,7 @@ class Question < ApplicationRecord
   validates :title, :content, presence: true
 
   def self.search(search)
-    search ? where(['title LIKE ?', "%#{search}%"]) : all
+    search ? where(['title LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%"]) : all
   end
 
 end

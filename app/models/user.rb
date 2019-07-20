@@ -18,6 +18,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :email, :encrypted_password, presence: true
+
   has_many :questions
   has_many :answers
   has_many :comments
